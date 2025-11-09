@@ -1,26 +1,43 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLaptopCode, FaPalette, FaReact } from "react-icons/fa";
-
-const skills = [
-  { icon: <FaLaptopCode size={30} color="#ff1e1e" />, title: "Web Development", desc: "Building responsive and modern websites using React." },
-  { icon: <FaReact size={30} color="#ff1e1e" />, title: "React Enthusiast", desc: "Creating dynamic applications with React and modern JS." },
-  { icon: <FaPalette size={30} color="#ff1e1e" />, title: "UI/UX Design", desc: "Designing user-friendly interfaces with bold color schemes." },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 function About() {
+  const { lang } = useLanguage();
+
+  const title = lang === "en" ? "About Me" : "عنّي";
+  const desc = lang === "en"
+    ? "I am a passionate developer who loves creating visually striking and functional web applications. My skills focus on React, modern frontend development, and crafting a smooth user experience."
+    : "أنا مطورة شغوفة أحب إنشاء تطبيقات ويب جذابة وفعّالة. مهاراتي تركز على React، تطوير الواجهة الحديثة، وتصميم تجربة مستخدم سلسة.";
+
+  const skills = lang === "en"
+    ? [
+        { icon: <FaLaptopCode size={30} color="#ff1e1e" />, title: "Web Development", desc: "Building responsive and modern websites using React." },
+        { icon: <FaReact size={30} color="#ff1e1e" />, title: "React Enthusiast", desc: "Creating dynamic applications with React and modern JS." },
+        { icon: <FaPalette size={30} color="#ff1e1e" />, title: "UI/UX Design", desc: "Designing user-friendly interfaces with bold color schemes." },
+      ]
+    : [
+        { icon: <FaLaptopCode size={30} color="#ff1e1e" />, title: "تطوير الويب", desc: "إنشاء مواقع تفاعلية وحديثة باستخدام React." },
+        { icon: <FaReact size={30} color="#ff1e1e" />, title: "React Enthusiast", desc: "إنشاء تطبيقات ديناميكية باستخدام React و JavaScript الحديثة." },
+        { icon: <FaPalette size={30} color="#ff1e1e" />, title: "تصميم UI/UX", desc: "تصميم واجهات سهلة الاستخدام مع ألوان جريئة." },
+      ];
+
   return (
-    <section id="about" style={{
-      padding: "80px 20px",
-      backgroundColor: "#0d0d0d",
-      fontFamily: "'Poppins', sans-serif",
-      color: "#ffffff",
-      textAlign: "center"
-    }}>
-      <h2 style={{ fontSize: "2.8rem", marginBottom: "40px", color: "#ff1e1e" }}>About Me</h2>
+    <section
+      id="about"
+      style={{
+        padding: "80px 20px",
+        backgroundColor: "#0d0d0d",
+        fontFamily: "'Poppins', sans-serif",
+        color: "#ffffff",
+        textAlign: "center",
+        direction: lang === "ar" ? "rtl" : "ltr"
+      }}
+    >
+      <h2 style={{ fontSize: "2.8rem", marginBottom: "40px", color: "#ff1e1e" }}>{title}</h2>
       <p style={{ maxWidth: "700px", margin: "0 auto 50px auto", fontSize: "1.2rem", lineHeight: "1.8" }}>
-        I am a passionate developer who loves creating visually striking and functional web applications.
-        My skills focus on React, modern frontend development, and crafting a smooth user experience.
+        {desc}
       </p>
 
       <div style={{
@@ -43,7 +60,8 @@ function About() {
               borderRadius: "15px",
               padding: "25px",
               border: "2px solid #ff1e1e",
-              transition: "0.3s"
+              transition: "0.3s",
+              textAlign: lang === "ar" ? "right" : "left"
             }}
           >
             <div style={{ marginBottom: "15px" }}>{skill.icon}</div>
