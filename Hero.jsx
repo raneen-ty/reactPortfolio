@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 function Hero() {
-  const texts = ["Full Stack Developer", "React Enthusiast", "Web Designer"];
+  const { lang } = useLanguage();
+
+  const texts = lang === "en"
+    ? ["Full Stack Developer", "React Enthusiast", "Web Designer"]
+    : ["مطور Full Stack", "متابعة React", "مصمم ويب"];
+
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState("");
 
@@ -17,18 +23,22 @@ function Hero() {
   }, [display, index, texts]);
 
   return (
-    <section id="home" style={{
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "#0d0d0d",
-      color: "#ffffff",
-      textAlign: "center",
-      fontFamily: "'Poppins', sans-serif",
-      backgroundImage: "linear-gradient(135deg, rgba(255,30,30,0.3), rgba(0,0,0,0.7))"
-    }}>
+    <section
+      id="home"
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#0d0d0d",
+        color: "#ffffff",
+        textAlign: "center",
+        fontFamily: "'Poppins', sans-serif",
+        backgroundImage: "linear-gradient(135deg, rgba(255,30,30,0.3), rgba(0,0,0,0.7))",
+        direction: lang === "ar" ? "rtl" : "ltr"
+      }}
+    >
       <motion.h1
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -37,6 +47,7 @@ function Hero() {
       >
         Raneen Thaer
       </motion.h1>
+
       <motion.p
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -45,6 +56,7 @@ function Hero() {
       >
         {display}
       </motion.p>
+
       <motion.a
         href="#projects"
         whileHover={{ scale: 1.1, boxShadow: "0 0 20px #ff1e1e" }}
@@ -60,12 +72,15 @@ function Hero() {
           transition: "0.3s"
         }}
       >
-        See My Work
+        {lang === "en" ? "See My Work" : "مشاريعي"}
       </motion.a>
     </section>
   );
 }
 
 export default Hero;
+
+
+
 
 
