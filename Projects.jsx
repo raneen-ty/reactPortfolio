@@ -1,23 +1,35 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-const projects = [
-  { title: "Portfolio Website", description: "My personal portfolio built with React.", link: "#" },
-  { title: "E-commerce App", description: "Online store with React and Firebase.", link: "#" },
-  { title: "Task Manager", description: "A productivity app with dark theme.", link: "#" },
-  { title: "Blog Platform", description: "A modern blogging platform with React & Node.", link: "#" },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 function Projects() {
+  const { lang } = useLanguage();
+
+  const title = lang === "en" ? "Projects" : "المشاريع";
+  const projects = lang === "en"
+    ? [
+        { title: "Portfolio Website", description: "My personal portfolio built with React.", link: "#" },
+        { title: "E-commerce App", description: "Online store with React and Firebase.", link: "#" },
+        { title: "Task Manager", description: "A productivity app with dark theme.", link: "#" },
+        { title: "Blog Platform", description: "A modern blogging platform with React & Node.", link: "#" },
+      ]
+    : [
+        { title: "موقعي الشخصي", description: "موقعي الشخصي تم بناؤه باستخدام React.", link: "#" },
+        { title: "تطبيق متجر إلكتروني", description: "متجر إلكتروني باستخدام React و Firebase.", link: "#" },
+        { title: "مدير المهام", description: "تطبيق لإدارة المهام مع سمة داكنة.", link: "#" },
+        { title: "منصة التدوين", description: "منصة تدوين حديثة باستخدام React و Node.", link: "#" },
+      ];
+
   return (
     <section id="projects" style={{
       padding: "80px 20px",
       backgroundColor: "#0d0d0d",
       color: "#ffffff",
       fontFamily: "'Poppins', sans-serif",
-      textAlign: "center"
+      textAlign: "center",
+      direction: lang === "ar" ? "rtl" : "ltr"
     }}>
-      <h2 style={{ fontSize: "2.8rem", marginBottom: "50px", color: "#ff1e1e" }}>Projects</h2>
+      <h2 style={{ fontSize: "2.8rem", marginBottom: "50px", color: "#ff1e1e" }}>{title}</h2>
       
       <div style={{
         display: "grid",
@@ -40,7 +52,7 @@ function Projects() {
               padding: "25px",
               border: "2px solid #ff1e1e",
               transition: "0.3s",
-              textAlign: "left"
+              textAlign: lang === "ar" ? "right" : "left"
             }}
           >
             <h3 style={{ color: "#ff1e1e", marginBottom: "15px", fontSize: "1.5rem" }}>{project.title}</h3>
@@ -53,12 +65,13 @@ function Projects() {
               textDecoration: "none",
               fontWeight: "600",
               boxShadow: "0 0 10px #ff1e1e",
-              transition: "0.3s"
+              transition: "0.3s",
+              display: "inline-block"
             }}
             onMouseEnter={e => e.currentTarget.style.boxShadow = "0 0 20px #ff1e1e"}
             onMouseLeave={e => e.currentTarget.style.boxShadow = "0 0 10px #ff1e1e"}
             >
-              View Project
+              {lang === "en" ? "View Project" : "عرض المشروع"}
             </a>
           </motion.div>
         ))}
@@ -68,6 +81,8 @@ function Projects() {
 }
 
 export default Projects;
+
+
 
 
 
