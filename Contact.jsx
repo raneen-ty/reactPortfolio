@@ -1,8 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaEnvelope, FaPhone } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 function Contact() {
+  const { lang } = useLanguage();
+
+  const title = lang === "en" ? "Get in Touch" : "تواصل معي";
+  const namePlaceholder = lang === "en" ? "Your Name" : "اسمك";
+  const emailPlaceholder = lang === "en" ? "Your Email" : "البريد الإلكتروني";
+  const messagePlaceholder = lang === "en" ? "Your Message" : "رسالتك";
+  const buttonText = lang === "en" ? "Send Message" : "أرسل الرسالة";
+
   return (
     <section
       id="contact"
@@ -15,9 +24,9 @@ function Contact() {
         fontFamily: "'Poppins', sans-serif",
         color: "#fff",
         padding: "60px 20px",
+        direction: lang === "ar" ? "rtl" : "ltr"
       }}
     >
- 
       <div style={{
         display: "flex",
         flexWrap: "wrap",
@@ -27,7 +36,6 @@ function Contact() {
         overflow: "hidden",
         boxShadow: "0 0 30px rgba(255,30,30,0.5)"
       }}>
-
 
         <motion.div
           initial={{ x: -100, opacity: 0 }}
@@ -42,8 +50,8 @@ function Contact() {
             gap: "25px"
           }}
         >
-          <h2 style={{ color: "#ff1e1e", fontSize: "2rem", marginBottom: "20px" }}>Get in Touch</h2>
-          <input type="text" placeholder="Your Name" style={{
+          <h2 style={{ color: "#ff1e1e", fontSize: "2rem", marginBottom: "20px" }}>{title}</h2>
+          <input type="text" placeholder={namePlaceholder} style={{
             padding: "15px",
             borderRadius: "12px",
             border: "none",
@@ -53,7 +61,7 @@ function Contact() {
             fontSize: "1rem",
             transition: "0.3s",
           }} />
-          <input type="email" placeholder="Your Email" style={{
+          <input type="email" placeholder={emailPlaceholder} style={{
             padding: "15px",
             borderRadius: "12px",
             border: "none",
@@ -63,7 +71,7 @@ function Contact() {
             fontSize: "1rem",
             transition: "0.3s",
           }} />
-          <textarea placeholder="Your Message" rows="5" style={{
+          <textarea placeholder={messagePlaceholder} rows="5" style={{
             padding: "15px",
             borderRadius: "12px",
             border: "none",
@@ -89,11 +97,10 @@ function Contact() {
               animation: "pulse 2s infinite"
             }}
           >
-            Send Message
+            {buttonText}
           </motion.button>
         </motion.div>
 
-  
         <motion.div
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -138,7 +145,6 @@ function Contact() {
         </motion.div>
       </div>
 
- 
       <style>{`
         @keyframes pulse {
           0% { box-shadow: 0 0 10px #ff1e1e; }
@@ -151,6 +157,8 @@ function Contact() {
 }
 
 export default Contact;
+
+
 
 
 
