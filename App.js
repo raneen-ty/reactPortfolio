@@ -10,10 +10,12 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
+      <main style={{ paddingTop: "80px" }}>
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </>
   );
